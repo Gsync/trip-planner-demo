@@ -10,11 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 //Material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
+import { WeatherCardComponent } from './weather-card/weather-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TripPlannerComponent
+    TripPlannerComponent,
+    WeatherCardComponent
   ],
   imports: [
     BrowserModule,

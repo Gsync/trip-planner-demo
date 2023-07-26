@@ -1,0 +1,14 @@
+<div class="tp-card-wrapper" *ngIf="currentWeather?.main">
+  <div class="tp-weather-wrapper">
+    <span>
+      <img [src]="weatherIconUrl" alt="weather icon" width="64" height="64" />
+    </span>
+    <span class="tp-temp">
+      {{ currentWeather.main?.temp | number : "1.0-0" }}°
+      <span>C</span>
+    </span>
+  </div>
+  <div class="tp-weather-desc">
+    {{ weatherDescription }}
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { City } from '../model/city.interface';
 import { EMPTY, Observable } from 'rxjs';
 import { MatSelectChange } from '@angular/material/select';
+import { WeatherResponse } from '../model/weather.interface';
 
 @Component({
   selector: 'app-trip-planner',
@@ -12,6 +13,7 @@ import { MatSelectChange } from '@angular/material/select';
 export class TripPlannerComponent implements OnInit {
   selectedCity = '';
   cities$: Observable<City[]> = EMPTY;
+  currentWeather: WeatherResponse = {};
 
   constructor(private dataService: DataService) {}
   
@@ -20,7 +22,8 @@ export class TripPlannerComponent implements OnInit {
   }
 
   selectedCityChange(event: MatSelectChange) {
-    console.log('selection changed: ', event);
-    // send request to fetch weather
+    this.dataService.getWeatherByCity(event.value).subscribe((res: WeatherResponse) => {
+      this.currentWeather = res;
+    })
   }
 }

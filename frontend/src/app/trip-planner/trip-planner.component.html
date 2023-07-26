@@ -1,10 +1,15 @@
 <main class="tp-container">
+  <div>
     <mat-form-field>
-        <mat-label>City Name</mat-label>
-        <mat-select (selectionChange)="selectedCityChange($event)">
-          <mat-option *ngFor="let city of cities$ | async" [value]="city.name">
-            {{ city.label }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <mat-label>City Name</mat-label>
+      <mat-select (selectionChange)="selectedCityChange($event)">
+        <mat-option *ngFor="let city of cities$ | async" [value]="city.name">
+          {{ city.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <app-weather-card [currentWeather]="currentWeather"></app-weather-card>
+  </div>
 </main>
