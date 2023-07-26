@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.tripplannerapi.model.City;
 
 @Service
 public class CityService {
+
+    @Value("${WEATHER_API_KEY}")
+    private String weatherApiKey;
 
     List<City> cities = new ArrayList<>(Arrays.asList(
         new City(
@@ -41,5 +49,25 @@ public class CityService {
 
     public List<City> getCities() {
         return cities;
+    }
+
+    public ResponseEntity<Object> getWeatherbyCityName(String cityName) {
+        try {
+            final String baseUrl = "http://api.openweathermap.org/data/2.5/weather";
+            String uri = UriComponentsBuilder
+                .fromUriString(baseUrl)
+                .queryParam("appid", weatherApiKey)
+                .queryParam("q", cityName)
+                .queryParam("limit", 5)
+                .queryParam("units", "metric")
+                .build().toUriString();
+            RestTemplate restTemplate = new RestTemplate();
+
+            String res = restTemplate.getForObject(uri, String.class);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error!, Please try again", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
