@@ -3,13 +3,36 @@
     <mat-form-field>
       <mat-label>City Name</mat-label>
       <mat-select (selectionChange)="selectedCityChange($event)">
-        <mat-option *ngFor="let city of cities$ | async" [value]="city.name">
+        <mat-option *ngFor="let city of cities$ | async" [value]="city">
           {{ city.label }}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
+  <div *ngIf="selectedCity.name" class="tp-mt-2 tp-ml-2">
+    <h2>{{ selectedCity.label }}</h2>
+    <p>{{ selectedCity.description }}</p>
+  </div>
   <div>
+    <h3 *ngIf="currentWeather.main">Current Weather</h3>
     <app-weather-card [currentWeather]="currentWeather"></app-weather-card>
+  </div>
+  <div class="tp-mt-2">
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (dateChange)="dateChanged('change', $event)">
+      <mat-hint>* Next 5 days only</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div *ngIf="errorDescription" class="tp-error tp-mt-2">
+    <p>{{ errorDescription }}</p>
+  </div>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <h2 *ngIf="forecastList.length">Weather Forecast for {{ selectedDate | date: 'fullDate' }}</h2>
+  <div class="tp-mt-2" *ngFor="let forecast of forecastList">
+    <span>{{ forecast?.dt | date: 'short':'UTC' }}</span>
+    <app-weather-card [currentWeather]="forecast"></app-weather-card>
   </div>
 </main>

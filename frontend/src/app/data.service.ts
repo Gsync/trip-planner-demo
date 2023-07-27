@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { City } from './model/city.interface';
-import { WeatherResponse } from './model/weather.interface';
+import { ForecastResponse, WeatherResponse } from './model/weather.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,9 @@ export class DataService {
 
   getWeatherByCity(cityName: string) {
     return this.http.get<WeatherResponse>(this.baseUrl + "weather/" + cityName);
+  }
+
+  getWeatherForecast(cityName: string) {
+    return this.http.get<ForecastResponse>(this.baseUrl + "forecast/" + cityName);
   }
 }
