@@ -73,6 +73,7 @@ target/
 /tripplannerapi/build/
 /tripplannerapi/!**/src/main/**/build/
 /tripplannerapi/!**/src/test/**/build/
+/tripplannerapi/src/main/resources/application.properties
 
 ### VS Code ###
 .vscode/
