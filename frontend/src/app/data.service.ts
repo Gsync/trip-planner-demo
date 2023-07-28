@@ -7,7 +7,8 @@ import { ForecastResponse, WeatherResponse } from './model/weather.interface';
   providedIn: 'root'
 })
 export class DataService {
-  baseUrl = 'http://localhost:5001/api/';
+  // baseUrl = 'http://localhost:5001/api/';
+  baseUrl = 'http://tp-spring-api-test.eba-jqjw3ayh.us-west-2.elasticbeanstalk.com/api/';
   constructor(private http: HttpClient) { }
 
   getCities() {

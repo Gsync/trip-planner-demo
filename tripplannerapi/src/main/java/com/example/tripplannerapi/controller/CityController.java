@@ -12,7 +12,7 @@ import com.example.tripplannerapi.model.City;
 import com.example.tripplannerapi.service.CityService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://khuram-trip-planner-demo.s3-website-us-west-2.amazonaws.com")
 @RequestMapping(path = "/api")
 public class CityController {
     
